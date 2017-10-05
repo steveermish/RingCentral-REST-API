@@ -58,15 +58,18 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "{{basic_auth_header}}"
+                "value": "{{basic_auth_header}}",
+                "description": ""
               },
               {
                 "key": "Accept",
-                "value": "application/json"
+                "value": "application/json",
+                "description": ""
               },
               {
                 "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded;charset=UTF-8"
+                "value": "application/x-www-form-urlencoded;charset=UTF-8",
+                "description": ""
               }
             ],
             "body": {
