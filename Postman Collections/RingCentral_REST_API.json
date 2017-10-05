@@ -1,0 +1,156 @@
+{
+  "variables": [],
+  "info": {
+    "name": "RingCentral REST API",
+    "_postman_id": "aa467aba-f448-98e5-180e-0ac9580b544d",
+    "description": "Authenticates to RingCentral API using OAuth2.0 and retrieves detail call logs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "54cbfb71-7a0e-21f7-966f-f06a86499fe1",
+      "name": "Auth",
+      "description": "OAuth2.0 Token Request",
+      "item": [
+        {
+          "_postman_id": "aa5e7851-b6e1-4cdb-4674-6f78d0a05330",
+          "name": "Fetch access_token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "tests[\"Contains an access_token\"] = jsonData.hasOwnProperty('access_token');",
+                  "",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "postman.setEnvironmentVariable(\"my_access_token\", jsonData.access_token);"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Populate the Postman environment with:",
+                  "// RC_SERVER_HOSTNAME, RC_APP_KEY, RC_APP_SECRET,",
+                  "// RC_USERNAME, RC_EXTENSION, RC_PASSWORD",
+                  "var appKey = environment[\"RC_APP_KEY\"];",
+                  "var appSecret = environment[\"RC_APP_SECRET\"];",
+                  "var apiKey = encodeBasicAuthHeader(appKey, appSecret);",
+                  "",
+                  "postman.setEnvironmentVariable(\"basic_auth_header\", \"Basic \".concat(apiKey));",
+                  "",
+                  "function encodeBasicAuthHeader(appKey, appSecret) {",
+                  "    var apiKey = appKey + ':' + appSecret;",
+                  "    return btoa(apiKey);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{basic_auth_header}}"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded;charset=UTF-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "{{RC_USERNAME}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{RC_PASSWORD}}",
+                  "type": "text"
+                },
+                {
+                  "key": "extension",
+                  "value": "{{RC_EXTENSION}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": "https://{{RC_SERVER_HOSTNAME}}/restapi/oauth/token",
+            "description": "Fetch access_token from DevTest environment as Admin"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "9ed223c0-eb3f-24fb-1a60-d573d7688a69",
+      "name": "Get Call Log Detail",
+      "description": "Pull all call logs for the account in the detail format.",
+      "item": [
+        {
+          "_postman_id": "64d70980-196b-9a44-1dd6-5f3a55f10518",
+          "name": "Get Call Log Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{my_access_token}}"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?view=Detailed",
+              "protocol": "https",
+              "host": [
+                "{{RC_SERVER_HOSTNAME}}"
+              ],
+              "path": [
+                "restapi",
+                "v1.0",
+                "account",
+                "~",
+                "call-log"
+              ],
+              "query": [
+                {
+                  "key": "view",
+                  "value": "Detailed",
+                  "equals": true
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
