@@ -168,7 +168,7 @@
       "item": [
         {
           "_postman_id": "55cd9827-7a62-b10d-2a28-5f07fc3040da",
-          "name": "Get Account Info copy",
+          "name": "Get Account Info",
           "request": {
             "url": {
               "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/:accountId",
