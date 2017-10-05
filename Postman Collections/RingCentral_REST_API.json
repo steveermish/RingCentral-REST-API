@@ -105,7 +105,7 @@
     },
     {
       "_postman_id": "9ed223c0-eb3f-24fb-1a60-d573d7688a69",
-      "name": "Call Log",
+      "name": "Log Detail",
       "description": "Pull all call logs for the account in the detail format.",
       "item": [
         {
