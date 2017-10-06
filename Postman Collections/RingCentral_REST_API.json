@@ -195,61 +195,6 @@
           "response": []
         }
       ]
-    },
-    {
-      "_postman_id": "9d0a1f76-ef91-c0b3-a4e0-987777d05b49",
-      "name": "Account",
-      "description": "",
-      "item": [
-        {
-          "_postman_id": "55cd9827-7a62-b10d-2a28-5f07fc3040da",
-          "name": "Get Account Info",
-          "request": {
-            "url": {
-              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/:accountId",
-              "protocol": "https",
-              "auth": {},
-              "host": [
-                "{{RC_SERVER_HOSTNAME}}"
-              ],
-              "path": [
-                "restapi",
-                "v1.0",
-                "account",
-                ":accountId"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "key": "accountId",
-                  "value": "~"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{my_access_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
-            "description": ""
-          },
-          "response": []
-        }
-      ]
     }
   ]
 }
