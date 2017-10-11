@@ -191,7 +191,7 @@
           "name": "Get Call Log Detail p2",
           "request": {
             "url": {
-              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=1&perPage=1000",
+              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=2&perPage=1000",
               "protocol": "https",
               "auth": {},
               "host": [
@@ -221,7 +221,7 @@
                 },
                 {
                   "key": "page",
-                  "value": "1",
+                  "value": "2",
                   "equals": true,
                   "description": ""
                 },
