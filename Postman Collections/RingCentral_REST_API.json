@@ -113,7 +113,7 @@
           "name": "Get Call Log Detail",
           "request": {
             "url": {
-              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?view=Detailed",
+              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=1&perPage=1000",
               "protocol": "https",
               "auth": {},
               "host": [
@@ -127,12 +127,6 @@
                 "call-log"
               ],
               "query": [
-                {
-                  "key": "view",
-                  "value": "Detailed",
-                  "equals": true,
-                  "description": ""
-                },
                 {
                   "key": "showBlocked",
                   "value": "true",
@@ -151,15 +145,13 @@
                   "key": "page",
                   "value": "1",
                   "equals": true,
-                  "description": "",
-                  "disabled": true
+                  "description": ""
                 },
                 {
                   "key": "perPage",
-                  "value": "100",
+                  "value": "1000",
                   "equals": true,
-                  "description": "",
-                  "disabled": true
+                  "description": ""
                 },
                 {
                   "key": "extensionNumber",
