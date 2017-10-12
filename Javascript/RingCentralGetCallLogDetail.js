@@ -37,7 +37,6 @@ function readCallLog(){
   var dateTo = date.toISOString()
 
   var params = {}
-  // See the API reference for more request parameters
   params['type'] = 'Voice'
   params['view'] = 'Detailed'
   params['dateFrom'] = dateFrom.replace('/', ':')
@@ -48,7 +47,6 @@ function readCallLog(){
   .then(function(resp){
     var json = resp.json()
     if (json.records.length > 0){
-      // Check the API documentation for call log data fields then add whatever you are interested
       var cvs = 'uri,startTime,duration,type,direction,action,result,to_name,from_name,transport'
       for (var record of json.records){
         cvs += "\r\n"
@@ -70,16 +68,11 @@ function readCallLog(){
         cvs += record.transport
       }
       var fs = require('fs')
-      //var filename = dateTo.replace('/','-')
-      //var filename = dateTo.replace(/\//g,'-')
-      //var savedate = Date.toISOString()
-      //var savetime = date.getTime()
       var today = new Date();
       var date = today.getFullYear()+''+(today.getMonth()+1)+''+today.getDate()
       var time = today.getHours() + '' + today.getMinutes() + '' + today.getSeconds()
       var dateTime = date+' '+time
       fs.writeFile('RingCentralCallLog'+dateTime+'.csv', cvs, function(err) {
-      //fs.writeFile('call_log_'+dateTo+'.csv', cvs, function(err) {
         if(err)
           console.log(err);
         else
