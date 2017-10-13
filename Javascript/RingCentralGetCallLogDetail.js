@@ -80,7 +80,8 @@ function readCallLog(){
       })
     }
   })
-  .catch(function(e){
-    throw e
+  .catch((error) => {
+    assert.isNotOk(error,'Promise error')
+    done()
   })
 }
