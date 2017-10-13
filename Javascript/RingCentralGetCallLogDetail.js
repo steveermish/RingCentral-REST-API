@@ -47,7 +47,7 @@ function readCallLog(){
   .then(function(resp){
     var json = resp.json()
     if (json.records.length > 0){
-      var cvs = 'uri,startTime,duration,type,direction,action,result,to_name,from_name,transport'
+      var cvs = 'uri,startTime,duration,type,direction,action,result,to_name,to_phoneNumber,from_name,from_phoneNumber,transport'
       for (var record of json.records){
         cvs += "\r\n"
         cvs += record.uri + ','
@@ -57,14 +57,22 @@ function readCallLog(){
         cvs += record.direction + ','
         cvs += record.action + ','
         cvs += record.result + ','
-        if (record.to.name != undefined)
-          cvs += record.to.name + ','
-        else
-          cvs += 'null,'
-          if (record.from.name != undefined)
-            cvs += record.from.name + ','
-          else
-            cvs += 'null,'
+      if (typeof record.to.name != undefined)
+        cvs += record.to.name + ','
+      else 
+        cvs += 'null,'
+      if (typeof record.to.phoneNumber != undefined)
+        cvs += record.to.phoneNumber + ','
+      else 
+        cvs += 'null,'
+      if (typeof record.from.name != undefined)
+        cvs += record.from.name + ','
+      else 
+        cvs += 'null,'
+      if (typeof record.from.phoneNumber != undefined)
+        cvs += record.from.phoneNumber + ','
+      else 
+        cvs += 'null,'
         cvs += record.transport
       }
       var fs = require('fs')
