@@ -110,7 +110,7 @@
       "item": [
         {
           "_postman_id": "64d70980-196b-9a44-1dd6-5f3a55f10518",
-          "name": "Get Call Log Detail p1",
+          "name": "Get Call Log Detail",
           "request": {
             "url": {
               "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=1&perPage=1000",
@@ -182,7 +182,7 @@
               }
             ],
             "body": {},
-            "description": ""
+            "description": "Update page number to pull more than 1000 records."
           },
           "response": []
         }
