@@ -110,7 +110,7 @@
       "item": [
         {
           "_postman_id": "64d70980-196b-9a44-1dd6-5f3a55f10518",
-          "name": "Get Call Log Detail p1",
+          "name": "Get Call Log Detail",
           "request": {
             "url": {
               "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=1&perPage=1000",
@@ -182,85 +182,7 @@
               }
             ],
             "body": {},
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "7ca02440-0ab8-f341-6026-4f9fe116f117",
-          "name": "Get Call Log Detail p2",
-          "request": {
-            "url": {
-              "raw": "https://{{RC_SERVER_HOSTNAME}}/restapi/v1.0/account/~/call-log?page=2&perPage=1000",
-              "protocol": "https",
-              "auth": {},
-              "host": [
-                "{{RC_SERVER_HOSTNAME}}"
-              ],
-              "path": [
-                "restapi",
-                "v1.0",
-                "account",
-                "~",
-                "call-log"
-              ],
-              "query": [
-                {
-                  "key": "showBlocked",
-                  "value": "true",
-                  "equals": true,
-                  "description": "",
-                  "disabled": true
-                },
-                {
-                  "key": "dateFrom",
-                  "value": "2017-10-05T15:30:00.000Z",
-                  "equals": true,
-                  "description": "",
-                  "disabled": true
-                },
-                {
-                  "key": "page",
-                  "value": "2",
-                  "equals": true,
-                  "description": ""
-                },
-                {
-                  "key": "perPage",
-                  "value": "1000",
-                  "equals": true,
-                  "description": ""
-                },
-                {
-                  "key": "extensionNumber",
-                  "value": "77",
-                  "equals": true,
-                  "description": "",
-                  "disabled": true
-                }
-              ],
-              "variable": []
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "description": ""
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{my_access_token}}",
-                "description": ""
-              }
-            ],
-            "body": {},
-            "description": ""
+            "description": "Update page number to pull more than 1000 records."
           },
           "response": []
         }
