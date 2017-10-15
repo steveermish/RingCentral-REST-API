@@ -20,7 +20,7 @@ function login() {
       readCallLog()
       setInterval(function(){
         readCallLog()
-      }, 60 * 15 * 1000); // repeat reading call-log every 15 mins
+      }, 60 * 15 * 1000);
   })
   .catch(function(e){
     throw e
@@ -31,23 +31,24 @@ function readCallLog(){
   var date = new Date()
   var time = date.getTime()
   // 15-min period
-  var less15Min = time - (60 * 15 * 1000)
+  var less15Min = time - (60 * 1440 * 1000)
   var from = new Date(less15Min)
   var dateFrom = from.toISOString()
   var dateTo = date.toISOString()
-
-  var params = {}
+  params = {}
   params['type'] = 'Voice'
   params['view'] = 'Detailed'
   params['dateFrom'] = dateFrom.replace('/', ':')
   params['dateTo'] = dateTo.replace('/', ':')
+  params['perPage'] = '1000'
+  params['page'] = '1'
   console.log(params.dateFrom)
   console.log(params.dateTo)
   platform.get('/account/~/call-log', params)
   .then(function(resp){
     var json = resp.json()
-    if (json.records.length > 0){
-      var cvs = 'uri,startTime,duration,type,direction,action,result,to_name,to_phoneNumber,from_name,from_phoneNumber,transport'
+    if (json.records.length >= 0){
+      var cvs = 'uri,startTime,duration,type,direction,action,result,transport,to_phoneNumber,from_phoneNumber,from_name,to_name'
       for (var record of json.records){
         cvs += "\r\n"
         cvs += record.uri + ','
@@ -57,23 +58,27 @@ function readCallLog(){
         cvs += record.direction + ','
         cvs += record.action + ','
         cvs += record.result + ','
-      if (typeof record.to.name != undefined)
-        cvs += record.to.name + ','
-      else 
-        cvs += 'null,'
-      if (typeof record.to.phoneNumber != undefined)
-        cvs += record.to.phoneNumber + ','
-      else 
-        cvs += 'null,'
-      if (typeof record.from.name != undefined)
-        cvs += record.from.name + ','
-      else 
-        cvs += 'null,'
-      if (typeof record.from.phoneNumber != undefined)
-        cvs += record.from.phoneNumber + ','
-      else 
-        cvs += 'null,'
-        cvs += record.transport
+        cvs += record.transport + ','
+        
+        if (record.hasOwnProperty('to')){
+          if (record.to.hasOwnProperty('phoneNumber'))
+          cvs += record.to.phoneNumber + ','
+                  }
+                
+        if (record.hasOwnProperty('from')){
+          if (record.from.hasOwnProperty('phoneNumber'))
+          cvs += record.from.phoneNumber + ','
+                  }
+        
+        if (record.hasOwnProperty('from')){
+          if (record.from.hasOwnProperty('name'))
+          cvs += record.from.name + ','
+                  }
+        
+        if (record.hasOwnProperty('from')){
+          if (record.to.hasOwnProperty('name'))
+          cvs += record.to.name + ','
+                  }
       }
       var fs = require('fs')
       var today = new Date();
@@ -88,8 +93,7 @@ function readCallLog(){
       })
     }
   })
-  .catch((error) => {
-    assert.isNotOk(error,'Promise error')
-    done()
+  .catch(function(e){
+    throw e
   })
 }
