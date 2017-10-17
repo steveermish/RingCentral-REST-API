@@ -110,7 +110,7 @@ function readCallLog() {
         var date = today.getFullYear() + '' + (today.getMonth() + 1) + '' + today.getDate()
         var time = today.getHours() + '' + today.getMinutes() + '' + today.getSeconds()
         var dateTime = date + ' ' + time
-        fs.writeFile('RingCentralCallLog' + dateTime + '.csv', cvs, function (err) {
+        fs.writeFile('CallLogs/RingCentralCallLog' + dateTime + '.csv', cvs, function (err) {
           if (err)
             console.log(err);
           else
