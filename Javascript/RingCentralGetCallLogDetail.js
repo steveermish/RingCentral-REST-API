@@ -79,7 +79,7 @@ function readCallLog() {
           }
           cvs += record.id + ','
           cvs += record.result + ','
-          cvs += record.sessionID + ','
+          cvs += record.sessionId + ','
           cvs += record.startTime + ','
           if (record.hasOwnProperty('to')) {
             if (record.to.hasOwnProperty('extensionNumber'))
