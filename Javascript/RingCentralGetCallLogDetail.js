@@ -53,10 +53,13 @@ function readCallLog() {
         //var cvs = ',uri,startTime,duration,type,direction,action,result,transport,to_phoneNumber,from_phoneNumber,from_name,to_name'
         for (var record of json.records) {
           cvs += "\r\n"
-          cvs += record.action + ','
+          if (record.hasOwnProperty('action'))
+              cvs += record.action + ','
+            else cvs += ','
+          if (record.hasOwnProperty('direction'))
           cvs += record.direction + ','
+        else cvs += ','
           cvs += record.duration + ','
-
           if (record.hasOwnProperty('from')) {
             if (record.from.hasOwnProperty('extensionNumber'))
               cvs += record.from.extensionNumber + ','
@@ -77,10 +80,16 @@ function readCallLog() {
               cvs += record.from.phoneNumber + ','
             else cvs += ','
           }
+          if (record.hasOwnProperty('id'))
           cvs += record.id + ','
+        else cvs += ','
           cvs += record.result + ','
+          if (record.hasOwnProperty('sessionId'))
           cvs += record.sessionId + ','
+        else cvs += ','
+          if (record.hasOwnProperty('startTime'))
           cvs += record.startTime + ','
+        else cvs += ','
           if (record.hasOwnProperty('to')) {
             if (record.to.hasOwnProperty('extensionNumber'))
               cvs += record.to.extensionNumber + ','
@@ -101,8 +110,12 @@ function readCallLog() {
               cvs += record.to.phoneNumber + ','
             else cvs += ','
           }
+          if (record.hasOwnProperty('type'))
           cvs += record.type + ','
+        else cvs += ','
+          if (record.hasOwnProperty('uri'))
           cvs += record.uri + ','
+        else cvs += ','
 
         }
         var fs = require('fs')
