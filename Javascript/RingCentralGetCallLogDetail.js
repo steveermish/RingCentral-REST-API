@@ -49,10 +49,10 @@ function readCallLog() {
     .then(function (resp) {
       var json = resp.json()
       if (json.records.length >= 0) {
-        var cvs = 'records_action,records_direction,records_duration,records_from_extensionNumber,records_from_location,records_from_name,records_from_phoneNumber,records_id,records_result,records_sessionId,records_startTime,records_to_extensionNumber,records_to_location,records_to_name,records_to_phoneNumber,records_type,records_uri'
-        //var cvs = ',uri,startTime,duration,type,direction,action,result,transport,to_phoneNumber,from_phoneNumber,from_name,to_name'
+        // Unhide below if you need headers
+        var cvs = ''
+        //var cvs = 'records_action,records_direction,records_duration,records_from_extensionNumber,records_from_location,records_from_name,records_from_phoneNumber,records_id,records_result,records_sessionId,records_startTime,records_to_extensionNumber,records_to_location,records_to_name,records_to_phoneNumber,records_type,records_uri'
         for (var record of json.records) {
-          cvs += "\r\n"
           if (record.hasOwnProperty('action'))
               cvs += record.action + ','
             else cvs += ','
@@ -116,7 +116,7 @@ function readCallLog() {
           if (record.hasOwnProperty('uri'))
           cvs += record.uri + ','
         else cvs += ','
-
+        cvs += "\r\n"
         }
         var fs = require('fs')
         var today = new Date();
