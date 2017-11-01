@@ -21,7 +21,7 @@ function login() {
       readCallLog()
       setInterval(function () {
         readCallLog()
-      }, 60 * 15 * 1000);
+      }, 60 * 60 * 1000);
     })
     .catch(function (e) {
       throw e
@@ -31,8 +31,8 @@ function login() {
 function readCallLog() {
   var date = new Date()
   var time = date.getTime()
-  // 15-min period
-  var less15Min = time - (60 * 1440 * 1000)
+  // 1hr period
+  var less15Min = time - (60 * 60 * 1000)
   var from = new Date(less15Min)
   var dateFrom = from.toISOString()
   var dateTo = date.toISOString()
